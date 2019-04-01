@@ -21,57 +21,67 @@ import gin.tf
 from tf_agents.environments import gym_wrapper
 from tf_agents.environments import tf_py_environment
 
+import gym
+
 
 @gin.configurable
 def create_maze_env(env_name=None, top_down_view=False):
-  n_bins = 0
-  manual_collision = False
-  if env_name.startswith('Ego'):
-    n_bins = 8
-    env_name = env_name[3:]
-  if env_name.startswith('Ant'):
-    cls = AntMazeEnv
-    env_name = env_name[3:]
-    maze_size_scaling = 8
-  elif env_name.startswith('Point'):
-    cls = PointMazeEnv
-    manual_collision = True
-    env_name = env_name[5:]
-    maze_size_scaling = 4
-  else:
-    assert False, 'unknown env %s' % env_name
+  if any([env_name.startswith('Ego'),
+          env_name.startswith('Ant'),
+          env_name.startswith('Point')]):
+    n_bins = 0
+    manual_collision = False
+    if env_name.startswith('Ego'):
+      n_bins = 8
+      env_name = env_name[3:]
+    if env_name.startswith('Ant'):
+      cls = AntMazeEnv
+      env_name = env_name[3:]
+      maze_size_scaling = 8
+    elif env_name.startswith('Point'):
+      cls = PointMazeEnv
+      manual_collision = True
+      env_name = env_name[5:]
+      maze_size_scaling = 4
+    else:
+      assert False, 'unknown env %s' % env_name
 
-  maze_id = None
-  observe_blocks = False
-  put_spin_near_agent = False
-  if env_name == 'Maze':
-    maze_id = 'Maze'
-  elif env_name == 'Push':
-    maze_id = 'Push'
-  elif env_name == 'Fall':
-    maze_id = 'Fall'
-  elif env_name == 'Block':
-    maze_id = 'Block'
-    put_spin_near_agent = True
-    observe_blocks = True
-  elif env_name == 'BlockMaze':
-    maze_id = 'BlockMaze'
-    put_spin_near_agent = True
-    observe_blocks = True
-  else:
-    raise ValueError('Unknown maze environment %s' % env_name)
+    maze_id = None
+    observe_blocks = False
+    put_spin_near_agent = False
+    if env_name == 'Maze':
+      maze_id = 'Maze'
+    elif env_name == 'Push':
+      maze_id = 'Push'
+    elif env_name == 'Fall':
+      maze_id = 'Fall'
+    elif env_name == 'Block':
+      maze_id = 'Block'
+      put_spin_near_agent = True
+      observe_blocks = True
+    elif env_name == 'BlockMaze':
+      maze_id = 'BlockMaze'
+      put_spin_near_agent = True
+      observe_blocks = True
+    else:
+      raise ValueError('Unknown maze environment %s' % env_name)
 
-  gym_mujoco_kwargs = {
-      'maze_id': maze_id,
-      'n_bins': n_bins,
-      'observe_blocks': observe_blocks,
-      'put_spin_near_agent': put_spin_near_agent,
-      'top_down_view': top_down_view,
-      'manual_collision': manual_collision,
-      'maze_size_scaling': maze_size_scaling
-  }
-  gym_env = cls(**gym_mujoco_kwargs)
-  gym_env.reset()
+    gym_mujoco_kwargs = {
+        'maze_id': maze_id,
+        'n_bins': n_bins,
+        'observe_blocks': observe_blocks,
+        'put_spin_near_agent': put_spin_near_agent,
+        'top_down_view': top_down_view,
+        'manual_collision': manual_collision,
+        'maze_size_scaling': maze_size_scaling
+    }
+    gym_env = cls(**gym_mujoco_kwargs)
+    gym_env.reset()
+  else:
+    import os
+    import sys; sys.path.insert(0, os.path.expanduser('~/code/td3'))
+    import reacher_family
+    gym_env = gym.make(env_name).unwrapped
   wrapped_env = gym_wrapper.GymWrapper(gym_env)
   return wrapped_env
 

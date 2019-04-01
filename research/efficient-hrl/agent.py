@@ -353,6 +353,7 @@ class UvfAgentCore(object):
       batch_items = [tf.expand_dims(item, 0) for item in items]
       (states, actions, rewards, next_states,
        state_reprs, next_state_reprs) = batch_items[:6]
+      # import ipdb; ipdb.set_trace()
       context_reward = self.compute_rewards(
           mode, state_reprs, actions, rewards, next_state_reprs,
           batch_items[6:])[0][0]

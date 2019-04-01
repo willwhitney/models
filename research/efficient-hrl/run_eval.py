@@ -44,7 +44,8 @@ def main(_):
   if FLAGS.params:
     gin.parse_config(FLAGS.params)
 
-  eval_.evaluate(FLAGS.checkpoint_dir, FLAGS.eval_dir)
+  # import ipdb; ipdb.set_trace()
+  eval_.evaluate(FLAGS.checkpoint_dir, FLAGS.eval_dir, checkpoint_range=[0,1e10])
 
 
 if __name__ == "__main__":

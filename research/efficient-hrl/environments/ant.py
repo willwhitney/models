@@ -47,10 +47,11 @@ class AntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
 
     mujoco_env.MujocoEnv.__init__(self, file_path, 5)
     utils.EzPickle.__init__(self)
+    self.seed()
 
   @property
   def physics(self):
-    return self.model
+    return self.sim
 
   def _step(self, a):
     return self.step(a)
@@ -74,6 +75,7 @@ class AntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
   def _get_obs(self):
     # No cfrc observation
     if self._expose_all_qpos:
+      # import ipdb; ipdb.set_trace()
       obs = np.concatenate([
           self.physics.data.qpos.flat[:15],  # Ensures only ant obs.
           self.physics.data.qvel.flat[:14],
@@ -113,11 +115,11 @@ class AntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
     return self._get_obs()
 
   def viewer_setup(self):
-    self.viewer.cam.distance = self.model.stat.extent * 0.5
+    self.viewer.cam.distance = self.physics.stat.extent * 0.5
 
   def get_ori(self):
     ori = [0, 1, 0, 0]
-    rot = self.model.data.qpos[self.__class__.ORI_IND:self.__class__.ORI_IND + 4]  # take the quaternion
+    rot = self.physics.data.qpos[self.__class__.ORI_IND:self.__class__.ORI_IND + 4]  # take the quaternion
     ori = q_mult(q_mult(rot, ori), q_inv(rot))[1:3]  # project onto x-y plane
     ori = math.atan2(ori[1], ori[0])
     return ori

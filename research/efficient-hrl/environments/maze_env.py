@@ -228,9 +228,9 @@ class MazeEnv(gym.Env):
         raise Exception("Every geom of the torso must have a name "
                         "defined")
 
-    _, file_path = tempfile.mkstemp(text=True)
+    _, file_path = tempfile.mkstemp(text=True, suffix=".xml")
     tree.write(file_path)
-
+    print("Wrote environment XML to {}".format(file_path))
     self.wrapped_env = model_cls(*args, file_path=file_path, **kwargs)
 
   def get_ori(self):
