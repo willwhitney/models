@@ -79,7 +79,7 @@ def create_maze_env(env_name=None, top_down_view=False):
     gym_env.reset()
   else:
     import os
-    import sys; sys.path.insert(0, os.path.expanduser('~/code/td3'))
+    import sys; sys.path.insert(0, os.path.expanduser('~/code/TD3'))
     import reacher_family
     gym_env = gym.make(env_name).unwrapped
   wrapped_env = gym_wrapper.GymWrapper(gym_env)

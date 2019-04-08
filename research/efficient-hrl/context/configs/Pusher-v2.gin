@@ -1,5 +1,5 @@
 #-*-Python-*-
-create_maze_env.env_name = "ReacherVertical-v2"
+create_maze_env.env_name = "Pusher-v2"
 context_range = (%CONTEXT_RANGE_MIN, %CONTEXT_RANGE_MAX)
 meta_context_range = (0, 1)
 
@@ -34,7 +34,6 @@ agent/Context.context_transition_fn = @relative_context_transition_fn
 agent/Context.context_multi_transition_fn = @relative_context_multi_transition_fn
 
 agent/Context.reward_fn = @uvf/negative_distance
-# agent/Context.reward_fn = @task/plain_rewards
 
 ## Config meta context
 meta/Context.context_ranges = [%meta_context_range]

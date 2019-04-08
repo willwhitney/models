@@ -63,7 +63,7 @@ tf.losses.huber_loss.delta = 1.0
 # Sample action
 
 # changed per Ofir's recommendation
-uvf_add_noise_fn.stddev = 0.1 #1.0
+uvf_add_noise_fn.stddev = 0.03 #1.0
 meta_add_noise_fn.stddev = %META_EXPLORE_NOISE
 # Update targets
 ddpg_update_targets.tau = 0.001

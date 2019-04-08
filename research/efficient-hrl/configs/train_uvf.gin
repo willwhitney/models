@@ -18,7 +18,7 @@ train_uvf.actor_optimizer = @actor/AdamOptimizer()
 train_uvf.meta_critic_optimizer = @meta_critic/AdamOptimizer()
 train_uvf.meta_actor_optimizer = @meta_actor/AdamOptimizer()
 train_uvf.repr_optimizer = @repr/AdamOptimizer()
-train_uvf.num_episodes_train = 25000
+train_uvf.num_episodes_train = 100000
 train_uvf.batch_size = 100
 train_uvf.initial_episodes = 5
 train_uvf.gamma = 0.99
@@ -30,7 +30,7 @@ train_uvf.num_collect_per_update = 1
 train_uvf.num_collect_per_meta_update = 10
 train_uvf.debug_summaries = False
 train_uvf.log_every_n_steps = 1000
-train_uvf.save_policy_every_n_steps = 1000
+train_uvf.save_policy_every_n_steps = 5000
 
 # Config Optimizers
 critic/AdamOptimizer.learning_rate = 0.001
