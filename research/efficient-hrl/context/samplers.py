@@ -421,10 +421,12 @@ class DirectionSampler(RandomSampler):
           axis=1)
     else: raise NotImplementedError(context_range)
     self._validate_contexts(contexts)
+
     if 'sampler_fn' in kwargs:
       other_contexts = kwargs['sampler_fn']()
     else:
       other_contexts = contexts
+    
     state, next_state = kwargs['state'], kwargs['next_state']
     if state is not None and next_state is not None:
       my_context_range = (np.array(context_range[1]) - np.array(context_range[0])) / 2 * np.ones(spec.shape.as_list())

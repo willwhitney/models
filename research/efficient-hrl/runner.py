@@ -27,7 +27,7 @@ code_dir = '/private/home/willwhitney/code'
 #     },
 # ]
 
-basename = "reacher_noisestd0.03"
+basename = "reacher_zerosamp_noise001_metanoise1"
 grids = [
     {
         "env": ["Reacher-v2"],
@@ -109,10 +109,10 @@ for job in jobs:
         slurmfile.write("#SBATCH --time=0-12\n")
         # slurmfile.write("#SBATCH --time=2-00\n")
         # slurmfile.write("#SBATCH -p dev\n")
-        slurmfile.write("#SBATCH -p uninterrupted,dev\n")
+        # slurmfile.write("#SBATCH -p uninterrupted,dev\n")
         # slurmfile.write("#SBATCH -p uninterrupted\n")
-        # slurmfile.write("#SBATCH -p dev,uninterrupted,priority\n")
-        # slurmfile.write("#SBATCH --comment='ICLR workshop 3/7'\n")
+        slurmfile.write("#SBATCH -p dev,uninterrupted,priority\n")
+        slurmfile.write("#SBATCH --comment='contract end 4/24'\n")
         slurmfile.write("#SBATCH -N 1\n")
         slurmfile.write("#SBATCH --mem=32gb\n")
 
