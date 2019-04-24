@@ -27,7 +27,7 @@ code_dir = '/private/home/willwhitney/code'
 #     },
 # ]
 
-basename = "reacher_zerosamp_noise001_metanoise1"
+basename = "reacher_zerosamp_noise01_metanoise1_subdim4"
 grids = [
     {
         "env": ["Reacher-v2"],

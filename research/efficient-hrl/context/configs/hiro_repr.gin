@@ -7,7 +7,7 @@ ZERO_OBS = False
 IMAGES = False
 CONTEXT_RANGE_MIN = -10
 CONTEXT_RANGE_MAX = 10
-SUBGOAL_DIM = 2
+SUBGOAL_DIM = 4
 META_EXPLORE_NOISE = 1  # 5
 
 StatePreprocess.trainable = True
