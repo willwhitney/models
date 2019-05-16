@@ -9,7 +9,7 @@ if not os.path.exists("slurm_logs"):
     os.makedirs("slurm_logs")
 if not os.path.exists("slurm_scripts"):
     os.makedirs("slurm_scripts")
-code_dir = '/private/home/willwhitney/code'
+code_dir = '..'
 
 # basename = "antmaze_gpu"
 # grids = [
@@ -27,10 +27,17 @@ code_dir = '/private/home/willwhitney/code'
 #     },
 # ]
 
-basename = "reacher_zerosamp_noise01_metanoise1_subdim4"
+basename = "benchmark_sweep"
 grids = [
     {
-        "env": ["Reacher-v2"],
+        "env": [
+            "ReacherVertical-v2",
+            "ReacherTurn-v2",
+            "ReacherPush-v2",
+            "Pusher-v2",
+            "Striker-v2",
+            "Thrower-v2",
+        ],
         "seed": range(8),
     },
 ]
@@ -106,13 +113,12 @@ for job in jobs:
         slurmfile.write("#SBATCH --error=slurm_logs/" + jobname + ".err\n")
         slurmfile.write("#SBATCH --export=ALL\n")
         slurmfile.write("#SBATCH --signal=USR1@600\n")
-        slurmfile.write("#SBATCH --time=0-12\n")
-        # slurmfile.write("#SBATCH --time=2-00\n")
+        # slurmfile.write("#SBATCH --time=0-12\n")
+        slurmfile.write("#SBATCH --time=2-00\n")
         # slurmfile.write("#SBATCH -p dev\n")
         # slurmfile.write("#SBATCH -p uninterrupted,dev\n")
         # slurmfile.write("#SBATCH -p uninterrupted\n")
-        slurmfile.write("#SBATCH -p dev,uninterrupted,priority\n")
-        slurmfile.write("#SBATCH --comment='contract end 4/24'\n")
+        slurmfile.write("#SBATCH --constraint=pascal|turing|volta\n")
         slurmfile.write("#SBATCH -N 1\n")
         slurmfile.write("#SBATCH --mem=32gb\n")
 

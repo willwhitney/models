@@ -1,5 +1,5 @@
 #-*-Python-*-
-create_maze_env.env_name = "ReacherVertical-v2"
+create_maze_env.env_name = "Striker-v2"
 context_range = (%CONTEXT_RANGE_MIN, %CONTEXT_RANGE_MAX)
 meta_context_range = (0, 1)
 

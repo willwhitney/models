@@ -43,14 +43,16 @@ def main():
   suite = ""
   binary = "python {bb}/run_eval{suite}.py ".format(bb=bb, suite=suite)
 
-  h = os.environ["HOME"]
+  # h = os.environ["HOME"] + "/code/hiro-results"
+  h = "/misc/vlgscratch4/FergusGroup/hiro-results"
+  
   ucp = CONFIGS_PATH
   ccp = CONTEXT_CONFIGS_PATH
   extra = ''
   command_str = ("{binary} "
                  "--logtostderr "
-                 "--checkpoint_dir={h}/tmp/{context_setting}/{context}/{agent}/{exp}/train "
-                 "--eval_dir={h}/tmp/{context_setting}/{context}/{agent}/{exp}/eval "
+                 "--checkpoint_dir={h}/{context_setting}/{context}/{agent}/{exp}/train "
+                 "--eval_dir={h}/{context_setting}/{context}/{agent}/{exp}/eval "
                  "--config_file={ucp}/{agent}.gin "
                  "--config_file={ucp}/eval_{extra}uvf.gin "
                  "--config_file={ccp}/{context_setting}.gin "

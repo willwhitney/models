@@ -44,7 +44,8 @@ def main():
   suite = ""
   binary = "python {bb}/run_train{suite}.py ".format(bb=bb, suite=suite)
 
-  h = os.environ["HOME"]
+  # h = os.environ["HOME"] + "/code/hiro-results"  
+  h = "/misc/vlgscratch4/FergusGroup/hiro-results"
   ucp = CONFIGS_PATH
   ccp = CONTEXT_CONFIGS_PATH
   extra = ''
