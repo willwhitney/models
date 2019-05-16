@@ -9,7 +9,7 @@ if not os.path.exists("slurm_logs"):
     os.makedirs("slurm_logs")
 if not os.path.exists("slurm_scripts"):
     os.makedirs("slurm_scripts")
-code_dir = '..'
+code_dir = '../../..'
 
 # basename = "antmaze_gpu"
 # grids = [

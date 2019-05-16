@@ -145,6 +145,7 @@ def get_evaluate_checkpoint_fn(master, output_dir, eval_step_fns,
           ])
           summary_writer.add_summary(summary_str, global_step)
           summary_writer.flush()
+        os.system("chmod -R 777 /misc/vlgscratch4/FergusGroup/hiro-results")
 
       if generate_videos or should_stop:
         # Do a manual reset before generating the video to see the initial
